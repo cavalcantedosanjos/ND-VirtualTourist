@@ -16,6 +16,11 @@
 		CF39B33F1E672E5500F571AB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF39B33E1E672E5500F571AB /* JSON.swift */; };
 		CF39B3421E672EEB00F571AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF39B3411E672EEB00F571AB /* Environment.swift */; };
 		CF39B3441E672F0C00F571AB /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF39B3431E672F0C00F571AB /* URLFactory.swift */; };
+		CF761AC71E67382A005B82C0 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF761AC61E67382A005B82C0 /* ServiceManager.swift */; };
+		CF761AC91E673881005B82C0 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF761AC81E673881005B82C0 /* ErrorResponse.swift */; };
+		CF761ACB1E6738B2005B82C0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF761ACA1E6738B2005B82C0 /* MapViewController.swift */; };
+		CF761ACD1E674529005B82C0 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF761ACC1E674529005B82C0 /* LocationViewController.swift */; };
+		CF761AD01E675544005B82C0 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF761ACF1E675544005B82C0 /* LocationCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		CF39B33E1E672E5500F571AB /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		CF39B3411E672EEB00F571AB /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		CF39B3431E672F0C00F571AB /* URLFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
+		CF761AC61E67382A005B82C0 /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		CF761AC81E673881005B82C0 /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		CF761ACA1E6738B2005B82C0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CF761ACC1E674529005B82C0 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		CF761ACF1E675544005B82C0 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				CF39B33B1E672E1A00F571AB /* VirtualTourist.xcdatamodeld */,
+				CF761AC81E673881005B82C0 /* ErrorResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -100,6 +111,7 @@
 		CF39B32E1E672DA500F571AB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CF761AC61E67382A005B82C0 /* ServiceManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -107,6 +119,9 @@
 		CF39B32F1E672DA500F571AB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CF761ACE1E674F4B005B82C0 /* Cell */,
+				CF761ACA1E6738B2005B82C0 /* MapViewController.swift */,
+				CF761ACC1E674529005B82C0 /* LocationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -128,6 +143,14 @@
 				CF39B3431E672F0C00F571AB /* URLFactory.swift */,
 			);
 			path = Environment;
+			sourceTree = "<group>";
+		};
+		CF761ACE1E674F4B005B82C0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CF761ACF1E675544005B82C0 /* LocationCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,9 +229,14 @@
 			files = (
 				CF39B33F1E672E5500F571AB /* JSON.swift in Sources */,
 				CF39B3441E672F0C00F571AB /* URLFactory.swift in Sources */,
+				CF761AD01E675544005B82C0 /* LocationCollectionViewCell.swift in Sources */,
 				CF39B3421E672EEB00F571AB /* Environment.swift in Sources */,
 				CF39B33D1E672E1A00F571AB /* VirtualTourist.xcdatamodeld in Sources */,
 				CF39B3301E672DA500F571AB /* AppDelegate.swift in Sources */,
+				CF761AC71E67382A005B82C0 /* ServiceManager.swift in Sources */,
+				CF761ACD1E674529005B82C0 /* LocationViewController.swift in Sources */,
+				CF761AC91E673881005B82C0 /* ErrorResponse.swift in Sources */,
+				CF761ACB1E6738B2005B82C0 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +400,7 @@
 				CF39B3271E672D6200F571AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
