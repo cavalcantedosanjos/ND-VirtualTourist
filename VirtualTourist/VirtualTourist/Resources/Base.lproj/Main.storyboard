@@ -12,7 +12,7 @@
         <!--Virtual Tourist-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TravelLocationsController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -37,7 +37,9 @@
                             <constraint firstItem="0L1-d9-SzS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lXV-ms-1vG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Virtual Tourist" id="il7-Ig-04A"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="il7-Ig-04A">
+                        <barButtonItem key="backBarButtonItem" title="Ok" id="4Jx-Qh-W6x"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="0L1-d9-SzS" id="QU0-eH-TQm"/>
                         <segue destination="oOH-Yp-FSH" kind="show" identifier="selectedPinSegue" id="inY-Vf-qRm"/>
@@ -50,7 +52,7 @@
         <!--Virtual Tourist-->
         <scene sceneID="KjV-uy-pRw">
             <objects>
-                <viewController title="Virtual Tourist" id="oOH-Yp-FSH" customClass="LocationViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Virtual Tourist" id="oOH-Yp-FSH" customClass="PhotoAlbumViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d9r-F4-Z7L"/>
                         <viewControllerLayoutGuide type="bottom" id="Uos-ec-dR1"/>
@@ -125,6 +127,11 @@
                             <constraint firstAttribute="trailing" secondItem="fLt-UY-N1U" secondAttribute="trailing" id="zgx-K8-3qu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionViewFlowLayout" destination="qZY-fI-281" id="N1R-Y8-e5a"/>
+                        <outlet property="mapView" destination="aT0-as-QtL" id="4Db-LP-vhT"/>
+                        <outlet property="photoAlbumColletionView" destination="kvZ-Ib-7d7" id="ef9-c7-rXa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njJ-jR-Zl4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -138,6 +145,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SKz-HH-T5V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

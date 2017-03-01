@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationCollectionViewCell: UICollectionViewCell {
+class PhotoAlbumViewCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var locationImageView: UIImageView!
     
     func setup() {

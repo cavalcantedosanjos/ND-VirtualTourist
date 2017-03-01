@@ -9,11 +9,12 @@
 import UIKit
 import MapKit
 
-class LocationViewController: UIViewController {
+class PhotoAlbumViewController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var locationColletionView: UICollectionView!
+    @IBOutlet weak var photoAlbumColletionView: UICollectionView!
+    @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -33,14 +34,14 @@ class LocationViewController: UIViewController {
 }
 
 // MARK: - MKMapViewDelegate
-extension LocationViewController: MKMapViewDelegate {
+extension PhotoAlbumViewController: MKMapViewDelegate {
     
 }
 
-extension LocationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! LocationCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! PhotoAlbumViewCollectionViewCell
         cell.setup()
         return cell
     }

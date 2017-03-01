@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class TravelLocationsController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!
@@ -63,7 +63,7 @@ class MapViewController: UIViewController {
 }
 
 // MARK: - MKMapViewDelegate
-extension MapViewController: MKMapViewDelegate {
+extension TravelLocationsController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         self.performSegue(withIdentifier: kSelectedPinSegue, sender: nil)
     }
