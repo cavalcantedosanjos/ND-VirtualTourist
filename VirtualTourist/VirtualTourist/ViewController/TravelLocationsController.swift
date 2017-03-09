@@ -8,19 +8,25 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+import CoreData
 
 class TravelLocationsController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!
+    
     let kSelectedPinSegue = "selectedPinSegue"
+    
+    var pins = [Pin]()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addGestureInMapView()
-       
+        loadLocations()
+        loadLastRegion()
         
     }
     
@@ -49,14 +55,56 @@ class TravelLocationsController: UIViewController {
         
         if(gestureRecognizer.state == .began)
         {
-
             let touchPoint = gestureRecognizer.location(in: self.mapView)
             let newCoordinate = self.mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
             let annotation = MKPointAnnotation()
             
             annotation.coordinate = newCoordinate
             self.mapView.addAnnotation(annotation)
+            
+            let pin = Pin(context: CoreDataStack.sharedInstance().context)
+            pin.latitude = annotation.coordinate.latitude
+            pin.longitude = annotation.coordinate.longitude
+            
+            DispatchQueue.main.async {
+                CoreDataStack.sharedInstance().save()
+            }
+
         }
+    }
+    
+    func loadLocations() {
+        var annotations = [MKAnnotation]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
+        
+        do {
+            let results = try CoreDataStack.sharedInstance().context.fetch(fetchRequest)
+            pins.append(contentsOf: (results as! [Pin]))
+        } catch {
+            
+            return
+        }
+        
+        for pin in pins {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pin.latitude),longitude: CLLocationDegrees(pin.longitude))
+            annotations.append(annotation)
+        }
+        
+        mapView.addAnnotations(annotations)
+        
+    }
+    
+    func loadLastRegion() {
+        
+        if Map.latitude == 0 && Map.longitude == 0 && Map.latitudeDelta == 0 && Map.longitudeDelta == 0 {
+            return
+        }
+        
+        let center = CLLocationCoordinate2D(latitude: Map.latitude, longitude: Map.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: Map.latitudeDelta, longitudeDelta: Map.longitudeDelta)
+        
+        mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
     }
     
     

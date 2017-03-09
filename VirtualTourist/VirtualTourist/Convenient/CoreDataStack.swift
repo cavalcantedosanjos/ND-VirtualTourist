@@ -11,6 +11,14 @@ import CoreData
 // MARK: - CoreDataStack
 
 struct CoreDataStack {
+   
+    // MARK: Shared Instance
+    static func sharedInstance() -> CoreDataStack {
+        struct Singleton {
+            static var sharedInstance = CoreDataStack(modelName: "Model")
+        }
+        return Singleton.sharedInstance!
+    }
     
     // MARK: Properties
     
