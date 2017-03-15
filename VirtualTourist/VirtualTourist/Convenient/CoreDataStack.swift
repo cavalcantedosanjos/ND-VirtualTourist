@@ -11,16 +11,10 @@ import CoreData
 // MARK: - CoreDataStack
 
 struct CoreDataStack {
-   
-    // MARK: Shared Instance
-    static func sharedInstance() -> CoreDataStack {
-        struct Singleton {
-            static var sharedInstance = CoreDataStack(modelName: "Model")
-        }
-        return Singleton.sharedInstance!
-    }
     
     // MARK: Properties
+    
+    static let sharedInstance = CoreDataStack(modelName: "Model")
     
     private let model: NSManagedObjectModel
     internal let coordinator: NSPersistentStoreCoordinator
@@ -128,7 +122,7 @@ extension CoreDataStack {
 // MARK: - CoreDataStack (Save Data)
 
 extension CoreDataStack {
-
+    
     func save() {
         // We call this synchronously, but it's a very fast
         // operation (it doesn't hit the disk). We need to know

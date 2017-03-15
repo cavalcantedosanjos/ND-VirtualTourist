@@ -1,15 +1,15 @@
 //
-//  Pin+CoreDataClass.swift
+//  Pin.swift
 //  VirtualTourist
 //
 //  Created by Joao Anjos on 15/03/17.
 //  Copyright © 2017 Joao Anjos. All rights reserved.
 //
 
-import Foundation
-import CoreData
+import UIKit
+import MapKit
 
-@objc(Pin)
-public class Pin: NSManagedObject {
-
+class PinPointAnnotation: MKPointAnnotation {
+    var pin: Pin?
 }
+

@@ -41,35 +41,39 @@ class TravelLocationsController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == kSelectedPinSegue {
+            let vc = segue.destination as! PhotoAlbumViewController
+            vc.pointPin = sender as! PinPointAnnotation
+        }
     }
     
     // MARK: - Helpers
     func addGestureInMapView() {
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotations(gestureRecognizer:)))
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPressRecogniser.minimumPressDuration = 0.5
         mapView.addGestureRecognizer(longPressRecogniser)
     }
     
-    func addAnnotations(gestureRecognizer:UIGestureRecognizer) {
+    func handleLongPress(gestureRecognizer:UIGestureRecognizer) {
         
-        if(gestureRecognizer.state == .began)
-        {
-            let touchPoint = gestureRecognizer.location(in: self.mapView)
-            let newCoordinate = self.mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
-            let annotation = MKPointAnnotation()
-            
-            annotation.coordinate = newCoordinate
-            self.mapView.addAnnotation(annotation)
-            
-            let pin = Pin(context: CoreDataStack.sharedInstance().context)
-            pin.latitude = annotation.coordinate.latitude
-            pin.longitude = annotation.coordinate.longitude
-            
-            DispatchQueue.main.async {
-                CoreDataStack.sharedInstance().save()
-            }
-
+        if gestureRecognizer.state != .began { return }
+        
+        let touchPoint = gestureRecognizer.location(in: self.mapView)
+        let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        
+        let annotation = PinPointAnnotation()
+        annotation.coordinate = touchMapCoordinate
+        
+        mapView.addAnnotation(annotation)
+        
+        let pin = Pin(context: CoreDataStack.sharedInstance!.context)
+        pin.latitude = annotation.coordinate.latitude
+        pin.longitude = annotation.coordinate.longitude
+        
+        annotation.pin = pin
+        
+        DispatchQueue.main.async {
+            CoreDataStack.sharedInstance?.save()
         }
     }
     
@@ -78,20 +82,21 @@ class TravelLocationsController: UIViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
         
         do {
-            let results = try CoreDataStack.sharedInstance().context.fetch(fetchRequest)
+            let results = try CoreDataStack.sharedInstance?.context.fetch(fetchRequest)
             pins.append(contentsOf: (results as! [Pin]))
         } catch {
-            
             return
         }
         
         for pin in pins {
-            let annotation = MKPointAnnotation()
+            let annotation = PinPointAnnotation()
+            annotation.pin = pin
             annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pin.latitude),longitude: CLLocationDegrees(pin.longitude))
             annotations.append(annotation)
         }
         
         mapView.addAnnotations(annotations)
+
         
     }
     
@@ -112,7 +117,23 @@ class TravelLocationsController: UIViewController {
 
 // MARK: - MKMapViewDelegate
 extension TravelLocationsController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        self.performSegue(withIdentifier: kSelectedPinSegue, sender: nil)
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        Map.latitude = mapView.region.center.latitude
+        Map.longitude = mapView.region.center.longitude
+        Map.latitudeDelta = mapView.region.span.latitudeDelta
+        Map.longitudeDelta = mapView.region.span.longitudeDelta
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard mapView.selectedAnnotations.count > 0, let pin = mapView.selectedAnnotations[0] as? PinPointAnnotation else {
+            return
+        }
+        
+        // Only one pin can be selected at time
+        mapView.selectedAnnotations.removeAll()
+        
+        performSegue(withIdentifier: kSelectedPinSegue, sender: pin)
+    }
+
 }

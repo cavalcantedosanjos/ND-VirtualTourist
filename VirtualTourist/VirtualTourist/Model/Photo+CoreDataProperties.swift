@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  VirtualTourist
 //
-//  Created by Joao Anjos on 08/03/17.
+//  Created by Joao Anjos on 15/03/17.
 //  Copyright © 2017 Joao Anjos. All rights reserved.
 //
 
